@@ -41,6 +41,7 @@ public class Software_Metodos_Numericos extends JFrame  {
     	txtNumeroAproximado = new JTextField(10);
     	lblNumeroVerdadero = new JLabel("Numero Verdadero: ");
     	lblNumeroAproximado = new JLabel("Nuemro Aproximado: ");
+    	lblNumeroCifra = new JLabel("Numero de Cifras");
     	chkErrAbs = new JCheckBox("Absoluto");
     	chkErrRel = new JCheckBox("Relativo");
     	chkErrPorc = new JCheckBox("Porcentual");
