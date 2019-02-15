@@ -15,6 +15,7 @@ public class Software_Metodos_Numericos extends JFrame  {
 	//DECLARACIÓN DE LOS MIEMBROS DE LA CLASE O ATRIBUTOS
     	JTextField txtNumeroVerdadero;
     	JTextField txtNumeroAproximado;
+    	JTextField txtCifra;
     	JLabel lblNumeroVerdadero;
     	JLabel lblNumeroAproximado;
     	JCheckBox chkErrAbs;
@@ -22,14 +23,18 @@ public class Software_Metodos_Numericos extends JFrame  {
     	JCheckBox chkErrPorc;
     	JButton cmdCalcular;
     	JLabel lblEscogeError;
+    	JLabel lblCifra;
     	JPanel panelReal;
     	JPanel panelAprox;
     	JPanel tiposError;
+    	JRadioButton rbtrunca;
+    	JRadioButton rbRedondea;
+    	JPanel PanelCifras;
 
     public Software_Metodos_Numericos() { 	
     	
     	super ("Calculadora de Errores");
-    	setSize(500, 200);
+    	setSize(500, 500);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
     	//OBTENER PANEL DE CONTENIDO GRAFICO
@@ -39,13 +44,19 @@ public class Software_Metodos_Numericos extends JFrame  {
     	//INICIALIZAMOS LOS COMPONENTES GRAFICOS
     	txtNumeroVerdadero = new JTextField(10);
     	txtNumeroAproximado = new JTextField(10);
+    	txtCifra = new JTextField(10);
     	lblNumeroVerdadero = new JLabel("Numero Verdadero: ");
     	lblNumeroAproximado = new JLabel("Nuemro Aproximado: ");
-    	lblNumeroCifra = new JLabel("Numero de Cifras");
     	chkErrAbs = new JCheckBox("Absoluto");
     	chkErrRel = new JCheckBox("Relativo");
     	chkErrPorc = new JCheckBox("Porcentual");
     	cmdCalcular = new JButton("CALCULAR");
+    	rbtrunca = new JRadioButton("Truncado");
+    	rbRedondea = new JRadioButton("Redondeado2");
+    	lblCifra = new JLabel("Escoja el numero de cifras");
+    	lblEscogeError = new JLabel("Escoge el error a calcular: ");
+    	
+    	
     	cmdCalcular.addActionListener
     	(
     		new ActionListener()
@@ -112,7 +123,7 @@ public class Software_Metodos_Numericos extends JFrame  {
     			}
     		}
     	);
-    	lblEscogeError = new JLabel("Escoge el error a calcular: ");
+    	
     	
     	//CREAMOS LOS PANELES    	
     	panelReal = new JPanel();
@@ -132,10 +143,19 @@ public class Software_Metodos_Numericos extends JFrame  {
     	tiposError.add(chkErrRel);
     	tiposError.add(chkErrPorc);
     	
+    	PanelCifras = new JPanel();
+    	PanelCifras.setLayout(new FlowLayout());
+    	PanelCifras.add(lblCifra);
+    	PanelCifras.add(txtCifra);
+    	PanelCifras.add(rbRedondea);
+    	PanelCifras.add(rbtrunca);
+    	
+    	
     	//AGREGAMOS LOS PANELES AL CONTENEDOR Y DESIGNAMOS LA POSICION EN LA VENTANA
     	contenedor.add(panelReal, BorderLayout.NORTH);
     	contenedor.add(panelAprox, BorderLayout.CENTER);
     	contenedor.add(tiposError, BorderLayout.CENTER);
+    	contenedor.add(PanelCifras, BorderLayout.CENTER);
     	contenedor.add(cmdCalcular, BorderLayout.SOUTH);
     	
     	//HACEMOS VISIBLE AL FRAME
