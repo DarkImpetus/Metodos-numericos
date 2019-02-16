@@ -1,16 +1,9 @@
-/**
- * @(#)Software_Metodos_Numericos.java
- *
- *
- * @author 
- * @version 1.00 2019/2/8
- */
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Software_Metodos_Numericos extends JFrame  {
+public class Software_Metodos_numericos extends JFrame  {
 	
 	//DECLARACIÓN DE LOS MIEMBROS DE LA CLASE O ATRIBUTOS
     	JTextField txtNumeroVerdadero;
@@ -30,8 +23,10 @@ public class Software_Metodos_Numericos extends JFrame  {
     	JRadioButton rbtrunca;
     	JRadioButton rbRedondea;
     	JPanel PanelCifras;
+    
+    				
 
-    public Software_Metodos_Numericos() { 	
+    public Software_Metodos_numericos() { 	
     	
     	super ("Calculadora de Errores");
     	setSize(500, 500);
@@ -46,13 +41,13 @@ public class Software_Metodos_Numericos extends JFrame  {
     	txtNumeroAproximado = new JTextField(10);
     	txtCifra = new JTextField(10);
     	lblNumeroVerdadero = new JLabel("Numero Verdadero: ");
-    	lblNumeroAproximado = new JLabel("Nuemro Aproximado: ");
+    	lblNumeroAproximado = new JLabel("Numero Aproximado: ");
     	chkErrAbs = new JCheckBox("Absoluto");
     	chkErrRel = new JCheckBox("Relativo");
     	chkErrPorc = new JCheckBox("Porcentual");
     	cmdCalcular = new JButton("CALCULAR");
     	rbtrunca = new JRadioButton("Truncado");
-    	rbRedondea = new JRadioButton("Redondeado2");
+    	rbRedondea = new JRadioButton("Redondeado");
     	lblCifra = new JLabel("Escoja el numero de cifras");
     	lblEscogeError = new JLabel("Escoge el error a calcular: ");
     	
@@ -63,16 +58,27 @@ public class Software_Metodos_Numericos extends JFrame  {
     		{
     			public void actionPerformed(ActionEvent e)
     			{
+    				
+    				
     				String datos = "";
     				double Num_Real;
     				double Num_Aprox;
     				double Error_Absoluto;
     				double Error_Relativo;
     				double Error_Porcentual;
+    				double Cifra;
+    				double aux;
+    				double aux2;
+    				
+    				
+    				//truncar
+    				
     				
     				
     				Num_Real = Double.parseDouble(txtNumeroVerdadero.getText());
     				Num_Aprox = Double.parseDouble(txtNumeroAproximado.getText());
+    				Cifra = Double.parseDouble(txtCifra.getText());
+    				
     				     				
     					if((Num_Real == 0))
     					{
@@ -88,7 +94,30 @@ public class Software_Metodos_Numericos extends JFrame  {
     							{
     								Error_Absoluto = (-1)*(Error_Absoluto);
     							}
-    							datos+= "El Error Absoluto es: " + Error_Absoluto + "\n";
+    							
+   //inicio del redondeo y truncado(error absoluto)
+   
+   								if ((rbRedondea.isSelected())||(rbtrunca.isSelected()))
+   								{
+   								
+    							if(rbRedondea.isSelected())
+    							{
+    						
+    							Error_Absoluto = redondearDecimales(Error_Absoluto,Cifra);
+    							}
+    							if(rbtrunca.isSelected())
+    							{
+    								aux = Error_Absoluto;
+    								aux2 = redondearDecimales2(Error_Absoluto,Cifra);
+    								aux = aux - aux2;
+    								Error_Absoluto = Error_Absoluto - aux;
+    							}
+   								}
+   								
+   								datos+= "El Error Absoluto es: " + Error_Absoluto + "\n";
+   								
+   //fin del proceso de redondeo y truncado(e.absoluto)			
+    							
     						}
     				
     						if(chkErrRel.isSelected())
@@ -99,7 +128,28 @@ public class Software_Metodos_Numericos extends JFrame  {
     								Error_Relativo = (-1)*(Error_Relativo);
     							}
     					
-    							datos+= "El Error Relativo es: " + Error_Relativo + "\n";
+  	 //inicio del redondeo
+  	 
+  	 							if ((rbRedondea.isSelected())||(rbtrunca.isSelected()))
+  	 							{
+  	 							
+    							if(rbRedondea.isSelected())
+    							{
+    							
+    						
+    								Error_Relativo = redondearDecimales2(Error_Relativo,Cifra);
+    							}
+    							//fin del proceso de redondeo
+    							if(rbtrunca.isSelected())
+    							{
+    								aux = Error_Relativo;
+    								aux2 = redondearDecimales2(Error_Relativo,Cifra);
+    								aux = aux - aux2;
+    								Error_Relativo = Error_Relativo - aux;	
+    							}
+    						}
+    						
+    						datos+= "El Error Relativo es: " + Error_Relativo + "\n";
     						}
     						if(chkErrPorc.isSelected())
     						{
@@ -108,6 +158,27 @@ public class Software_Metodos_Numericos extends JFrame  {
     							{
     								Error_Porcentual = (-1)*(Error_Porcentual);
     							}
+    							
+    							if ((rbRedondea.isSelected())||(rbtrunca.isSelected()))
+  	 							{
+  	 							
+    							if(rbRedondea.isSelected())
+    							{
+    							
+    						
+    								Error_Porcentual = redondearDecimales2(Error_Porcentual,Cifra);
+    							}
+    							//fin del proceso de redondeo
+    							if(rbtrunca.isSelected())
+    							{
+    								aux = Error_Porcentual;
+    								aux2 = redondearDecimales2(Error_Porcentual,Cifra);
+    								aux = aux - aux2;
+    								Error_Porcentual = Error_Porcentual - aux;
+    								
+    							}
+    						}
+    						
     					
     							datos+= "El Error Porcentual es: " + Error_Porcentual + "%\n";
     						}
@@ -118,6 +189,8 @@ public class Software_Metodos_Numericos extends JFrame  {
     				{
     					datos = "Seleccione un tipo de error a calcular\n";
     				}
+    				
+    				
     				
     				JOptionPane.showMessageDialog(null, datos);
     			}
@@ -165,10 +238,39 @@ public class Software_Metodos_Numericos extends JFrame  {
     	setResizable(true);  	
     	
     }//FIN DEL CONSTRUCTOR
+    public static double redondearDecimales(double Error_Absoluto, double Cifra) {
+        /*double parteEntera, resultado;
+        resultado = Error_Absoluto;
+        parteEntera = Math.floor(resultado);
+        resultado=(resultado-parteEntera)*Math.pow(10, Cifras);
+        resultado=Math.round(resultado);
+        resultado=(resultado/Math.pow(10, Cifras))+parteEntera;
+        return resultado;*/
+        double resultado;
+        resultado = Error_Absoluto * Math.pow(10,Cifra );
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10,Cifra);
+        return resultado;
+    };
+    public static double redondearDecimales2(double Error_Relativo, double Cifra) {
+        /*double parteEntera, resultado;
+        resultado = Error_Absoluto;
+        parteEntera = Math.floor(resultado);
+        resultado=(resultado-parteEntera)*Math.pow(10, Cifras);
+        resultado=Math.round(resultado);
+        resultado=(resultado/Math.pow(10, Cifras))+parteEntera;
+        return resultado;*/
+        double resultado;
+        resultado = Error_Relativo * Math.pow(10,Cifra );
+        resultado = Math.round(resultado);
+        resultado = resultado/Math.pow(10,Cifra);
+        return resultado;
+    }
     
-    public static void main (String[] args) {
     	
-    	Software_Metodos_Numericos ventana = new Software_Metodos_Numericos();
+    public static void main (String[] args) {
+    		
+    	Software_Metodos_numericos ventana = new Software_Metodos_numericos();
 }
     
 }
