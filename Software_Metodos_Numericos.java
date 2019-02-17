@@ -1,16 +1,9 @@
-/**
- * @(#)Software_Metodos_Numericos.java
- *
- *
- * @author 
- * @version 1.00 2019/2/8
- */
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Software_Metodos_Numericos extends JFrame  {
+public class Software_Metodos_numericos extends JFrame  {
 	
 	//DECLARACIÓN DE LOS MIEMBROS DE LA CLASE O ATRIBUTOS
     	JTextField txtNumeroVerdadero;
@@ -33,7 +26,7 @@ public class Software_Metodos_Numericos extends JFrame  {
     
     				
 
-    public Software_Metodos_Numericos() { 	
+    public Software_Metodos_numericos() { 	
     	
     	super ("Calculadora de Errores");
     	setSize(500, 500);
@@ -74,6 +67,11 @@ public class Software_Metodos_Numericos extends JFrame  {
     				double Error_Relativo;
     				double Error_Porcentual;
     				double Cifra;
+<<<<<<< HEAD
+=======
+    				double aux;
+    				double aux2;
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
     				
     				
     				//truncar
@@ -100,7 +98,11 @@ public class Software_Metodos_Numericos extends JFrame  {
     								Error_Absoluto = (-1)*(Error_Absoluto);
     							}
     							
+<<<<<<< HEAD
                                 //inicio del redondeo y truncado(error absoluto)
+=======
+   //inicio del redondeo y truncado(error absoluto)
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
    
    								if ((rbRedondea.isSelected())||(rbtrunca.isSelected()))
    								{
@@ -108,6 +110,7 @@ public class Software_Metodos_Numericos extends JFrame  {
     							if(rbRedondea.isSelected())
     							{
     						
+<<<<<<< HEAD
     							datos+= "el aboluto reondeado es: \n"+ redondearDecimales(Error_Absoluto,Cifra)+"\n";
     							}
     							if(rbtrunca.isSelected())
@@ -120,6 +123,22 @@ public class Software_Metodos_Numericos extends JFrame  {
    								datos+= "El Error Absoluto es: " + Error_Absoluto + "\n";
    								
    			
+=======
+    							Error_Absoluto = redondearDecimales(Error_Absoluto,Cifra);
+    							}
+    							if(rbtrunca.isSelected())
+    							{
+    								aux = Error_Absoluto;
+    								aux2 = redondearDecimales2(Error_Absoluto,Cifra);
+    								aux = aux - aux2;
+    								Error_Absoluto = Error_Absoluto - aux;
+    							}
+   								}
+   								
+   								datos+= "El Error Absoluto es: " + Error_Absoluto + "\n";
+   								
+   //fin del proceso de redondeo y truncado(e.absoluto)			
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
     							
     						}
     				
@@ -131,24 +150,44 @@ public class Software_Metodos_Numericos extends JFrame  {
     								Error_Relativo = (-1)*(Error_Relativo);
     							}
     					
+<<<<<<< HEAD
   	                            //inicio del redondeo
+=======
+  	 //inicio del redondeo
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
   	 
   	 							if ((rbRedondea.isSelected())||(rbtrunca.isSelected()))
   	 							{
   	 							
     							if(rbRedondea.isSelected())
     							{
+<<<<<<< HEAD
     						
     						    datos+= "el relativo redondeado es: \n"+ redondearDecimales(Error_Relativo,Cifra)+"\n";
+=======
+    							
+    						
+    								Error_Relativo = redondearDecimales2(Error_Relativo,Cifra);
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
     							}
     							//fin del proceso de redondeo
     							if(rbtrunca.isSelected())
     							{
+<<<<<<< HEAD
     							datos+= "el relativo truncado es: \n"+formatearDecimales(Error_Relativo, Cifra)+"\n";
     							}
     						}
     						//fin del redondeo truncado
     						else
+=======
+    								aux = Error_Relativo;
+    								aux2 = redondearDecimales2(Error_Relativo,Cifra);
+    								aux = aux - aux2;
+    								Error_Relativo = Error_Relativo - aux;	
+    							}
+    						}
+    						
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
     						datos+= "El Error Relativo es: " + Error_Relativo + "\n";
     						}
     						if(chkErrPorc.isSelected())
@@ -166,6 +205,7 @@ public class Software_Metodos_Numericos extends JFrame  {
     							{
     							
     						
+<<<<<<< HEAD
     							datos+= "el aboluto porcentual es: \n"+ redondearDecimales(Error_Porcentual,Cifra)+"\n";
     							}
     							
@@ -177,6 +217,21 @@ public class Software_Metodos_Numericos extends JFrame  {
     						}
     						//fin del proceso de redondeo
     						else
+=======
+    								Error_Porcentual = redondearDecimales2(Error_Porcentual,Cifra);
+    							}
+    							//fin del proceso de redondeo
+    							if(rbtrunca.isSelected())
+    							{
+    								aux = Error_Porcentual;
+    								aux2 = redondearDecimales2(Error_Porcentual,Cifra);
+    								aux = aux - aux2;
+    								Error_Porcentual = Error_Porcentual - aux;
+    								
+    							}
+    						}
+    						
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
     					
     						datos+= "El Error Porcentual es: " + Error_Porcentual + "%\n";
     						}
@@ -263,6 +318,7 @@ public class Software_Metodos_Numericos extends JFrame  {
         resultado = Math.round(resultado);
         resultado = resultado/Math.pow(10,Cifra);
         return resultado;
+<<<<<<< HEAD
     };
     public static Double formatearDecimales( Double  Error_Absoluto, Double Cifra) {
     return Math.floor(Error_Absoluto * Math.pow(10, Cifra)) / Math.pow(10, Cifra);
@@ -271,6 +327,14 @@ public class Software_Metodos_Numericos extends JFrame  {
     public static void main (String[] args) {
     		
     	Software_Metodos_Numericos ventana = new Software_Metodos_Numericos();
+=======
+    }
+    
+    	
+    public static void main (String[] args) {
+    		
+    	Software_Metodos_numericos ventana = new Software_Metodos_numericos();
+>>>>>>> c4618769e7b812f00088b5b191e2c57288c3fd0d
 }
     
 }
